@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            margin: 0;
+            background-color: #FFF;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            font-family: Helvetica, Sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: #FFF;
+        }
+
+        .rainbow-button {
+            width: calc(20vw + 6px);
+            height: calc(8vw + 6px);
+            background-image: linear-gradient(90deg, #00C0FF 0%, #FFCF00 49%, #FC4F4F 80%, #00C0FF 100%);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            text-transform: uppercase;
+            font-size: 3vw;
+            font-weight: bold;
+        }
+
+        .rainbow-button:after {
+            content: attr(alt);
+            width: 20vw;
+            height: 8vw;
+            background-color: #191919;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        .rainbow-button:hover {
+            animation: slidebg 2s linear infinite;
+        }
+
+        @keyframes slidebg {
+            to {
+                background-position: 20vw;
+            }
+        }
+    </style>
+    <title>GET JOKES</title>
+</head>
+
+<body>
+    {% csrf_token %}
+
+    <div class="botonera">
+        <centre>
+            <a href="/button" class="rainbow-button" alt="Get Joke"></a>
+            <hr>
+            {{jokes}}
+            <hr>
+        </centre>
+        <form action="/ButtonFav/" method="post">
+            <centre>
+                <a class="rainbow-button" alt="Fav Joke" href="/buttonFav?phrase={{ jokes|urlencode }}"></a>
+            </centre>
+    </div>
+    </form>
+</body>
+
+</html>
